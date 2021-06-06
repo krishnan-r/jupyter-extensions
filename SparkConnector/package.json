@@ -28,8 +28,10 @@
         "directory": "SparkConnector"
     },
     "scripts": {
-        "build": "jlpm run build:lib",
-        "build:labextension": "cd sparkconnector && rimraf labextension && mkdirp labextension && cd labextension && npm pack ../..",
+        "build": "jlpm run build:lib && jlpm run build:labextension:dev",
+        "build:prod": "jlpm run clean && jlpm run build:lib && jlpm run build:labextension && jlpm run build:nbextension",
+        "build:labextension": "jupyter labextension build .",
+        "build:labextension:dev": "jupyter labextension build --development True .",
         "build:nbextension": "yarn --cwd nbextension build",
         "build:lib": "tsc",
         "build:all": "jlpm run build:labextension && jlpm run build:nbextension",
@@ -40,21 +42,29 @@
         "clean:all": "jlpm run clean:lib && jlpm run clean:labextension && jlpm run clean:nbextension",
         "eslint": "eslint . --ext .ts,.tsx --fix",
         "eslint:check": "eslint . --ext .ts,.tsx",
-        "prepare": "jlpm run clean && jlpm run build",
-        "watch": "tsc -w",
+        "prepare": "jlpm run clean && jlpm run build:prod",
+        "watch": "run-p watch:src watch:labextension",
+        "watch:src": "tsc -w",
+        "watch:labextension": "jupyter labextension watch .",
         "install:all": "jlpm install && yarn --cwd nbextension install",
         "removeall": "rimraf nbextension/node_modules && rimraf node_modules"
     },
     "dependencies": {
-        "@jupyterlab/application": "^3.0.11"
+        "@jupyterlab/application": "^3.0.11",
+        "@jupyterlab/coreutils": "^5.0.6",
+        "@jupyterlab/notebook": "^3.0.11",
+        "@lumino/messaging": "^1.7.0",
+        "@lumino/widgets": "^1.23.0"
     },
     "devDependencies": {
+        "@jupyterlab/builder": "^3.0.9",
         "@typescript-eslint/eslint-plugin": "^4.24.0",
         "@typescript-eslint/parser": "^4.24.0",
         "eslint": "^7.26.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.1.2",
         "mkdirp": "^1.0.3",
+        "npm-run-all": "^4.1.5",
         "prettier": "2.3.0",
         "rimraf": "^3.0.2",
         "typescript": "~4.2.4"
@@ -70,6 +80,7 @@
                 }
             }
         },
-        "extension": true
+        "extension": true,
+        "outputDir": "sparkconnector/labextension"
     }
 }
