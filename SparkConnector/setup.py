@@ -33,7 +33,7 @@ package_data_spec = {
 }
 
 data_files_spec = [
-    ("share/jupyter/lab/extensions", lab_path, "**"),
+    ("share/jupyter/labextensions/@swan-cern/sparkconnector", lab_path, "**"),
     ("etc/jupyter/jupyter_notebook_config.d",
      "jupyter-config", "sparkconnector.json"),
 ]
