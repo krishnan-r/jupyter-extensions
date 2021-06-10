@@ -1,0 +1,47 @@
+{
+  "bundled_options": {
+    "INFO_EXAMPLE": {
+      "options": [
+        {
+          "name": "spark.logConf",
+          "value": "true"
+        }
+      ],
+      "cluster_filter": [],
+      "spark_version_filter": []
+    },
+    "DEBUG_EXAMPLE": {
+      "options": [
+        {
+          "name": "spark.driver.extraJavaOptions",
+          "concatenate": " ",
+          "value": "-Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true"
+        }
+      ],
+      "cluster_filter": [],
+      "spark_version_filter": []
+    },
+    "CMSSpark": {
+      "options": [
+        {
+          "name": "spark.sdasdasdasddriver.extraJavaOptions",
+          "concatenate": " ",
+          "value": "-Dsun.security.sdkjjsklasd;fdaslfkjadlsfkj;lasdkjf;lkjun.security.spnego.debug=true"
+        }
+      ],
+      "cluster_filter": [],
+      "spark_version_filter": []
+    },
+    "EnableS3": {
+      "options": [
+        {
+          "name": "sparaaaaaaaaaaaaaajljk.driver.extraJavaOptions",
+          "concatenate": " ",
+          "value": "-Dsuaaaaaaaaaaaaaaaaaaaaaaaaaaan.security.krb5.debug=true -Dsun.security.spnego.debug=true"
+        }
+      ],
+      "cluster_filter": [],
+      "spark_version_filter": []
+    }
+  }
+}

@@ -1,0 +1,309 @@
+.button-noborder{
+    border:none
+    }
+    .jp-SparkConnector {
+      display: flex;
+      flex-direction: column;
+      background: var(--jp-layout-color1);
+      color: var(--jp-ui-font-color1);
+      font-size: var(--jp-ui-font-size0);
+      height: 100%;
+    }
+    
+    .scrollable{
+      overflow:auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .jp-SparkConnector-border {
+      border-bottom: var(--jp-border-width) solid var(--jp-border-color2);
+    }
+    
+    .jp-SparkConnector-details {
+      margin: 0px;
+      padding: 8px 4px 4px 8px;
+      font-size: var(--jp-ui-font-size1);
+    }
+    
+    .jp-SparkConnector-details a {
+      color: var(--jp-info-color0);
+    }
+    
+    .jp-SparkConnector-details header {
+      flex: 0 0 auto;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .jp-SparkConnector-confDetailsList {
+      list-style-type: none;
+      padding-left: 12px;
+    }
+    
+    .jp-SparkConnector-panel {
+      display: flex;
+      flex-direction: row;
+      color: var(--jp-layout-color3);
+      height: 24px;
+      line-height: 24px;
+      border-bottom: var(--jp-border-width) solid var(--jp-border-color2);
+    }
+    
+    .jp-SparkConnector-panelLabel {
+      font-size: var(--jp-ui-font-size0);
+      flex: 1 1 auto;
+      margin-right: 4px;
+      padding-left: 4px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .jp-SparkConnector-panelConnect.jp-mod-styled {
+      margin: 0px 4px;
+      color: var(--jp-layout-color3);
+      font-weight: 700;
+      background-color: transparent;
+      height: 20px;
+      line-height: 20px;
+      transition: background-color 0.1s ease;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .jp-SparkConnector-panelConnect.jp-mod-styled:hover {
+      background-color: rgba(153, 153, 153, 0.1);
+    }
+    
+    .jp-SparkConnector-panelConnect.jp-mod-styled:focus {
+      border: none;
+      box-shadow: none;
+      background-color: rgba(153, 153, 153, 0.2);
+    }
+    
+    .jp-SparkConnector-itemAddConf.jp-mod-styled {
+      margin: 0px 4px;
+      color: var(--jp-layout-color3);
+      font-weight: 700;
+      background-color: transparent;
+      height: var(--jp-private-running-shutdown-button-height);
+      line-height: var(--jp-private-running-shutdown-button-height);
+      transition: background-color 0.1s ease;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .jp-SparkConnector-itemAddConf.jp-mod-styled:hover {
+      background-color: rgba(153, 153, 153, 0.1);
+    }
+    
+    .jp-SparkConnector-itemAddConf.jp-mod-styled:focus {
+      border: none;
+      box-shadow: none;
+      background-color: rgba(153, 153, 153, 0.2);
+    }
+    
+    .jp-SparkConnector-loading {
+      display: block;
+      position: absolute;
+      content: '';
+      left: -200px;
+      width: 200px;
+      height: 4px;
+      border-radius: 4px;
+      background-color: var(--jp-brand-color1);
+      animation: loading 2s linear infinite;
+    }
+    
+    .jp-SparkConnector-confDetailsContainer-sparkLogs {
+      padding: 4px 4px 4px 4px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      border: var(--jp-border-width) solid transparent;
+      border-radius: var(--jp-border-radius);
+    }
+    
+    .jp-SparkConnector-confDetailsContainer-sparkLogs pre {
+      font-size: var(--jp-ui-font-size0);
+    }
+    
+    .jp-SparkConnector-confDetailsContainer-sparkLogs.info {
+      color: var(--md-grey-700);
+      background-color: var(--md-grey-100);
+      border-color: var(--md-grey-300);
+      height: 300px;
+      overflow: scroll;
+      word-wrap: break-word;
+    }
+    
+    .jp-SparkConnector-confDetailsContainer-sparkLogs.alert {
+      color: var(--jp-error-color0);
+      background-color: var(--jp-error-color3);
+      border-color: var(--jp-error-color2);
+    }
+    
+    .jp-SparkConnector-bundlesList {
+      flex: 1 1 auto;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      overflow: auto;
+      background-color: var(--jp-layout-color1);
+    }
+    
+    .jp-SparkConnector-bundlesList li {
+      display: flex;
+      flex-direction: row;
+      padding: 4px 12px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    
+    .jp-SparkConnector-bundlesList li:hover {
+      background: var(--jp-layout-color2);
+    }
+    
+    .jp-SparkConnector-itemsList {
+      flex: 1 1 auto;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      overflow: auto;
+      background-color: var(--jp-layout-color1);
+    }
+    
+    .jp-SparkConnector-itemsList li {
+      display: flex;
+      flex-direction: row;
+      padding: 4px 12px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    
+    .jp-SparkConnector-itemsList li:hover {
+      background: var(--jp-layout-color2);
+    }
+    
+    .sparkOptions-suggestions {
+      border: 1px solid #999;
+      border-top-width: 0;
+      list-style: none;
+      margin-top: 0;
+      max-height: 143px;
+      overflow-y: auto;
+      padding-left: 0;
+      width: calc(300px + 1rem);
+    }
+    
+    .sparkOptions-suggestions li {
+      padding: 0.5rem;
+    }
+    
+    .sparkOptions-suggestion-active,
+    .sparkOptions-suggestions li:hover {
+      background-color: #03263C;
+      color: white; 
+      cursor: pointer;
+      font-weight: 700;
+    }
+    
+    .sparkOptions-suggestions li:not(:last-of-type) {
+      border-bottom: 1px solid #999;
+    }
+    
+    [data-jp-theme-light='true'] .jp-SparkConnector-icon {
+      background-image: url(Apache_Spark_logo.png);
+    }
+    
+    [data-jp-theme-light='false'] .jp-SparkConnector-icon {
+      background-image: url(Apache_Spark_logo.png);
+    }
+    
+    .jp-SparkConnect-Options {
+      position:relative;
+    }
+    
+    .jp-SparkConnect-removeOption {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      margin: 0px 4px;
+      color: var(--jp-layout-color3);
+      font-weight: 700;
+      background-color: transparent;
+      transition: background-color 0.1s ease;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .jp-SparkConnector-optionName{
+      font-weight: bold
+    
+    }
+    
+    .jp-SparkConnector-button{
+      background-color: #5cb85c;
+      color: white;
+      margin-left: 20px;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      text-align: center;
+      height: 30px;
+      
+    }
+    
+    #actionbutton{
+      color: var(--jp-layout-color0);
+    }
+    
+    .remove {
+    margin-right: 10px;
+    }
+    
+    .options-list{
+    padding-left: 5px;
+    }
+    
+    #jp-SparkConnector-confInput{
+      width: 300px;
+      width: -webkit-fill-available;
+      width: -moz-available;
+      margin-right:30px;
+    }
+    
+    .config-option{
+    float:left
+    }
+    
+    .config-remove{
+    float:right;
+    }
+    
+    .config-remove button{
+    background-color: transparent;
+      transition: background-color 0.1s ease;
+      border:none;
+    }
+    
+    .config-group{
+    justify-content: space-between;
+    }
+    
