@@ -20,7 +20,9 @@ class NotAttachedComponent extends React.Component {
     render() {
         return (
             <div className="jp-SparkConnector">
-                <div className="jp-SparkConnector-notattached"></div>
+                <div className="jp-SparkConnector-notattached">
+                    Open a notebook to connect to Apache Spark
+                </div>
             </div>
         );
     }

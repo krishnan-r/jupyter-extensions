@@ -209,9 +209,9 @@ class SparkConnectionDetails extends React.Component<SparkClusterVersion, {}> {
         <div>
           <div className="jp-SparkConnector-connectionDetailsContainer">
             <img className="jp-SparkConnector-logo" />
-            <div>
-              <div>Cluster {this.props.cluster}</div>
-              <div>Spark {this.props.sparkVersion}</div>
+            <div className="jp-SparkConnector-connectionDetailsContainerInfo">
+              Cluster <b>{this.props.cluster}</b> | Version{' '}
+              <b>{this.props.sparkVersion}</b>
             </div>
           </div>
         </div>

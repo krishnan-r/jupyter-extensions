@@ -314,7 +314,7 @@
 }
 
 .jp-SparkConnector-logo {
-  content:url("Apache_Spark_logo.png");
+  content: url('Apache_Spark_logo.png');
   height: 40px;
 }
 .jp-SparkConnector-connectionDetailsContainer {
@@ -322,4 +322,14 @@
   flex-direction: column;
   align-items: center;
   padding: 4px;
+}
+.jp-SparkConnector-notattached {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  opacity: 0.4;
+}
+.jp-SparkConnector-connectionDetailsContainerInfo {
+  opacity: 0.4;
 }
