@@ -322,14 +322,17 @@ export class SparkConnector extends ReactWidget {
                       title,
                       msg.content.data.error as string
                     );
+
                     notebookComm.states.connectfailed.onReconfigure.connect(
                       () => {
-                        // Connect button clicked
                         this.updateCurrent(undefinedStates.loading);
                         notebookComm.comm.send({
-                          type: "action",
-                          action: "sparkconn-action-open",
+                          action: "sparkconn-action-disconnect",
                         });
+
+                        // Restart the kernel, because SparkContexts are cached,  
+                        // we need to restart to do a clean retry again
+                        notebookComm.notebook.sessionContext.session.kernel.restart();
                       }
                     );
                     this.updateCurrent(notebookComm.states.connectfailed);
