@@ -1,38 +1,34 @@
 import * as React from "react";
-import { JSONExt, JSONObject } from "@lumino/coreutils";
 import { IState } from "./sparkconnector";
 import { ISignal, Signal } from "@lumino/signaling";
+import { LogList } from "./components/loglist";
 
 export class ConnectedState<P extends IState> {
   private template: JSX.Element;
-  private logs: Signal<this, string[]>;
+  private logs: Signal<this, string>;
   public onReconfigure: ISignal<this, void>;
 
   init(
     notebookTitle: string,
-    sparkVersion: string,
-    cluster: string,
-    session: JSONObject
+    driverUiUrl: string
   ): void {
     const onReconfigure = new Signal<this, void>(this);
-    const logs = new Signal<this, string[]>(this);
+    const logs = new Signal<this, string>(this);
 
     this.logs = logs;
     this.onReconfigure = onReconfigure;
     this.template = (
       <ConnectedComponent
         title={notebookTitle}
-        sparkVersion={sparkVersion}
-        cluster={cluster}
-        session={session}
+        driverUiUrl={driverUiUrl}
         onReconfigure={onReconfigure}
         logs={logs}
       />
     );
   }
 
-  log(logs: string[]): void {
-    this.logs.emit(logs);
+  log(message: string): void {
+    this.logs.emit(message);
   }
 
   render(): JSX.Element {
@@ -50,11 +46,11 @@ export class ConnectedState<P extends IState> {
 interface IConnectedProperties
   extends React.ClassAttributes<ConnectedComponent> {
   title: string;
-  cluster: string;
-  sparkVersion: string;
-  session: JSONObject;
+  // cluster: string;
+  // sparkVersion: string;
+  driverUiUrl: string;
   onReconfigure: Signal<ConnectedState<IState>, void>;
-  logs: Signal<ConnectedState<IState>, string[]>;
+  logs: Signal<ConnectedState<IState>, string>;
 }
 
 /**
@@ -74,8 +70,8 @@ class ConnectedComponent extends React.Component<IConnectedProperties> {
     this.props.logs.connect(this.logSlot);
   }
 
-  logSlot(connecting: any, logs: string[]) {
-    let fullLog = this.state.logs.concat(logs);
+  logSlot(connecting: any, message: string) {
+    let fullLog = this.state.logs.concat(message);
     if (this.state.shouldUpdate && this.state.logs.length == 0) {
       this.setState({
         shouldUpdate: true,
@@ -124,18 +120,8 @@ class ConnectedComponent extends React.Component<IConnectedProperties> {
     clearInterval(this.interval);
   }
 
-  getDriverUI(session: JSONObject): string {
-    if (!JSONExt.isPrimitive(session["driverui"])) {
-      return null;
-    }
-    return JSONExt.deepCopy(session["driverui"]) as string;
-  }
-
-  /**
-   * Renders a table of contents tree.
-   */
   render() {
-    let driverui = this.getDriverUI(this.props.session);
+    let driverui = this.props.driverUiUrl
     let onReconfigure = this.props.onReconfigure;
     //let logs = this.props.logs;
 
@@ -157,10 +143,10 @@ class ConnectedComponent extends React.Component<IConnectedProperties> {
           <div className="jp-SparkConnector-confDetailsContainer">
             <ul className="jp-SparkConnector-confDetailsList">
               <li className="jp-SparkConnector-confDetailsListItem">
-                Cluster {this.props.cluster}
+                {/* Cluster {this.props.cluster} */}
               </li>
               <li className="jp-SparkConnector-confDetailsListItem">
-                Spark {this.props.sparkVersion}
+                {/* Spark {this.props.sparkVersion} */}
               </li>
             </ul>
           </div>
@@ -178,6 +164,9 @@ class ConnectedComponent extends React.Component<IConnectedProperties> {
                   </a>
                 </li>
               )}
+              <li>Spark History Server is available <a>here</a></li>
+              <li>Spark Metrics are not enabled. (Please add the bundle to enable)</li>
+              <li>Spark Driver Logs of the running application</li>
             </ul>
           </div>
         </div>
@@ -196,30 +185,6 @@ class ConnectedComponent extends React.Component<IConnectedProperties> {
           >
             reconfigure
           </button>
-      </div>
-    );
-  }
-}
-
-/**
- * @private
- */
-interface ILogListProperties extends React.ClassAttributes<LogList> {
-  logs: string[];
-}
-
-/**
- * @private
- */
-class LogList extends React.Component<ILogListProperties> {
-  render() {
-    return (
-      <div className="jp-SparkConnector-confDetailsContainer-sparkLogs info">
-        {this.props.logs.map(
-          function (log: string, idx: number) {
-            return <pre key={idx}>{log}</pre>;
-          }.bind(this)
-        )}
       </div>
     );
   }

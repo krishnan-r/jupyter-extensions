@@ -5,10 +5,10 @@ import {Signal} from "@lumino/signaling";
 export class ConnectingState<P extends IState> {
 
     private template: JSX.Element;
-    private logs: Signal<this, string[]>;
+    private logs: Signal<this, string>;
 
     init(notebookTitle: string, sparkVersion: string, cluster: string): void {
-        const logs = new Signal<this,string[]>(this);
+        const logs = new Signal<this,string>(this);
 
         this.logs = logs;
         this.template = (<Connecting
@@ -19,8 +19,8 @@ export class ConnectingState<P extends IState> {
         />);
     }
 
-    log(logs: string[]): void {
-        this.logs.emit(logs);
+    log(message: string): void {
+        this.logs.emit(message);
     }
 
     render(): JSX.Element {
@@ -39,7 +39,7 @@ interface IConnectingProperties extends React.ClassAttributes<Connecting> {
     title: string;
     cluster: string;
     sparkVersion: string;
-    logs: Signal<ConnectingState<IState>,string[]>;
+    logs: Signal<ConnectingState<IState>,string>;
 }
 
 /**
@@ -56,10 +56,9 @@ class Connecting extends React.Component<IConnectingProperties> {
         this.logSlot = this.logSlot.bind(this);
     }
 
-    logSlot(connecting:any, logs: string[]) {
-        let fullLog = this.state.logs.concat(logs);
+    logSlot(connecting:any, message: string) {
         this.setState({
-            logs: fullLog
+            logs: [...this.state.logs, message]
         });
     }
 
