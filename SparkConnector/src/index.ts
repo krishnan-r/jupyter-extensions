@@ -36,7 +36,7 @@ function activate(
   spc.title.iconClass = 'jp-SparkConnector-icon jp-SideBar-tabIcon';
   spc.title.caption = 'Spark Connector';
   spc.id = 'spark-connector';
-  labShell.add(spc, 'left', { rank: 700 });
+  labShell.add(spc, 'right', { rank: 700 });
 
   // Add a menu for the plugin
   console.log('JupyterLab 3 SparkConnector is activated!');

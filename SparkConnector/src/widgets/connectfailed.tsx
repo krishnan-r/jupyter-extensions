@@ -62,7 +62,7 @@ class ConnectFailedComponent extends React.Component<IConnectFailedProperties> {
             {this.props.title}
           </span>
         </div>
-        <div className="jp-SparkConnector-details">
+        <div className="jp-SparkConnector-details jp-SparkConnector-failed">
           <header className="jp-SparkConnector-confDetailsHeader jp-SparkConnector-border">
             spark connection failed
           </header>
@@ -72,15 +72,13 @@ class ConnectFailedComponent extends React.Component<IConnectFailedProperties> {
             </div>
           </div>
         </div>
-        <div className="jp-SparkConnector-button">
           <button
-            className="jp-SparkConnector-panelConnect jp-mod-styled "
+            className="jp-SparkConnector-panelConnect jp-mod-styled jp-SparkConnector-button"
             id="actionbutton"
             onClick={onClick}
           >
-            reconfigure
+            Try Again
           </button>
-        </div>
       </div>
     );
   }

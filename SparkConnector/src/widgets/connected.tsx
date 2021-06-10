@@ -189,15 +189,13 @@ class ConnectedComponent extends React.Component<IConnectedProperties> {
             <LogList logs={this.state.displayedLogs} />
           </div>
         </div>
-        <div className="jp-SparkConnector-button">
           <button
-            className="jp-SparkConnector-panelConnect jp-mod-styled "
+            className="jp-SparkConnector-panelConnect jp-mod-styled jp-SparkConnector-button"
             id="actionbutton"
             onClick={onClick}
           >
             reconfigure
           </button>
-        </div>
       </div>
     );
   }

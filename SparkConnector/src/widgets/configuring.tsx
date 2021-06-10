@@ -1,10 +1,10 @@
-import React from "react";
-import { JSONExt, JSONArray, JSONObject, JSONValue } from "@lumino/coreutils";
-import { IState, SparkOpt, SparkconnectMetadata } from "./sparkconnector";
-import { InputSparkComponent } from "./inputsparkopts";
-import { ISignal, Signal } from "@lumino/signaling";
+import React from 'react';
+import { JSONExt, JSONArray, JSONObject, JSONValue } from '@lumino/coreutils';
+import { IState, SparkOpt, SparkconnectMetadata } from './sparkconnector';
+import { InputSparkComponent } from './inputsparkopts';
+import { ISignal, Signal } from '@lumino/signaling';
 //import { buildIcon} from '@jupyterlab/ui-components';
-import { addIcon, checkIcon, closeIcon } from "@jupyterlab/ui-components";
+import { addIcon, checkIcon, closeIcon } from '@jupyterlab/ui-components';
 export class ConfigurationState<P extends IState> {
   private template: JSX.Element;
   public onConnect: ISignal<this, JSONObject>;
@@ -21,13 +21,13 @@ export class ConfigurationState<P extends IState> {
     const signal = new Signal<this, JSONObject>(this);
 
     console.log(
-      notebookTitle + " currentOptions=" + JSON.stringify(currentOptions)
+      notebookTitle + ' currentOptions=' + JSON.stringify(currentOptions)
     );
     console.log(
-      notebookTitle + " availableOptions=" + JSON.stringify(availableOptions)
+      notebookTitle + ' availableOptions=' + JSON.stringify(availableOptions)
     );
     console.log(
-      notebookTitle + " availableBunbles=" + JSON.stringify(availableBundles)
+      notebookTitle + ' availableBunbles=' + JSON.stringify(availableBundles)
     );
 
     const bundleOptions = availableBundles?.bundled_options ?? [];
@@ -53,7 +53,7 @@ export class ConfigurationState<P extends IState> {
   }
 
   name(): string {
-    return "configuring";
+    return 'configuring';
   }
 }
 
@@ -72,7 +72,7 @@ interface ShowConfigProps {
 class ShowConfig extends React.Component<ShowConfigProps, any> {
   constructor(props: ShowConfigProps) {
     super(props);
-    console.log("props", this.props);
+    console.log('props', this.props);
     this.removeConfig = this.removeConfig.bind(this);
   }
   removeConfig(e: any) {
@@ -82,21 +82,21 @@ class ShowConfig extends React.Component<ShowConfigProps, any> {
   renderConf(config: SparkOpt) {
     const DeleteIcon = closeIcon.react;
     return (
-      <li className="config-group" key={config["name"] + "-config"}>
+      <li className="config-group" key={config['name'] + '-config'}>
         <div className="config-option">
           <ul className="options-list">
-            <li key={config["name"]}>
+            <li key={config['name']}>
               <span className="jp-SparkConnector-optionName">
-                {config["name"]}
+                {config['name']}
               </span>
             </li>
-            <li key={config["name"] + "-value"}>{config["value"]}</li>
+            <li key={config['name'] + '-value'}>{config['value']}</li>
           </ul>
         </div>
         <div className="config-remove">
           <button
             className="remove"
-            id={config["name"]}
+            id={config['name']}
             onClick={this.removeConfig}
           >
             <DeleteIcon />
@@ -112,7 +112,7 @@ class ShowConfig extends React.Component<ShowConfigProps, any> {
     let configsList;
     if (this.props.configs) {
       configsList = this.getOptionsList(this.props.configs);
-    } else configsList = "";
+    } else configsList = '';
     let bundlesList;
     if (this.props.bundles) {
       bundlesList = this.props.bundles.map((x: any) => {
@@ -125,7 +125,7 @@ class ShowConfig extends React.Component<ShowConfigProps, any> {
         );
       });
     } else {
-      configsList = "";
+      configsList = '';
     }
     return (
       <div className="jp-SparkConnector-details">
@@ -163,14 +163,14 @@ class ShowBundle extends React.Component<ShowBundleProps, {}> {
     return (
       <ul className="options-list">
         <li>
-          <div className="jp-SparkConnector-optionName">{config["name"]}</div>
+          <div className="jp-SparkConnector-optionName">{config['name']}</div>
         </li>
-        <li>{config["value"]}</li>
+        <li>{config['value']}</li>
       </ul>
     );
   }
   getBundleOptionsList(bundleName: string) {
-    return this.props.availableBundles[bundleName]["options"].map((x: any) =>
+    return this.props.availableBundles[bundleName]['options'].map((x: any) =>
       this.renderConf(x)
     );
   }
@@ -207,18 +207,12 @@ class SparkConnectionDetails extends React.Component<SparkClusterVersion, {}> {
     return (
       <div className="jp-SparkConnector-details">
         <div>
-          <header className="jp-SparkConnector-confDetailsHeader jp-SparkConnector-border">
-            spark connection
-          </header>
-          <div className="jp-SparkConnector-confDetailsContainer">
-            <ul className="jp-SparkConnector-confDetailsList">
-              <li className="jp-SparkConnector-confDetailsListItem">
-                Cluster {this.props.cluster}
-              </li>
-              <li className="jp-SparkConnector-confDetailsListItem">
-                Spark {this.props.sparkVersion}
-              </li>
-            </ul>
+          <div className="jp-SparkConnector-connectionDetailsContainer">
+            <img className="jp-SparkConnector-logo" />
+            <div>
+              <div>Cluster {this.props.cluster}</div>
+              <div>Spark {this.props.sparkVersion}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -282,13 +276,13 @@ class ChooseBundles extends React.Component<ChooseBundleProps, {}> {
         }
         return (
           <li key={index}>
-            {selected}{" "}
+            {selected}{' '}
             <button
               className="button-noborder"
               value={k}
               onClick={this.onClick}
             >
-              {" "}
+              {' '}
               {k}
             </button>
           </li>
@@ -349,15 +343,15 @@ class ConfigurationComponent extends React.Component<
 > {
   constructor(props: IConfigurationProperties) {
     super(props);
-    console.log("initializing the state with: ", this.props.currentOptions);
-    console.log("initializing the state with: ", this.props);
+    console.log('initializing the state with: ', this.props.currentOptions);
+    console.log('initializing the state with: ', this.props);
     this.state = {
-      list_of_options: this.props.currentOptions["list_of_options"] as Array<
-        SparkOpt
-      >,
-      bundled_options: this.props.currentOptions["bundled_options"] as Array<
-        string
-      >,
+      list_of_options: this.props.currentOptions[
+        'list_of_options'
+      ] as Array<SparkOpt>,
+      bundled_options: this.props.currentOptions[
+        'bundled_options'
+      ] as Array<string>,
     };
     this.handleAddBundle = this.handleAddBundle.bind(this);
     this.handleRemoveBundle = this.handleRemoveBundle.bind(this);
@@ -375,25 +369,25 @@ class ConfigurationComponent extends React.Component<
     }
 
     if (!JSONExt.isObject(option)) {
-      throw new Error("spark option value not found");
+      throw new Error('spark option value not found');
     }
-    if (!JSONExt.isPrimitive(option["value"])) {
-      throw new Error("spark option invalid");
+    if (!JSONExt.isPrimitive(option['value'])) {
+      throw new Error('spark option invalid');
     }
-    return JSONExt.deepCopy(option["value"]) as string;
+    return JSONExt.deepCopy(option['value']) as string;
   }
 
   getOptionGroup(option: JSONValue) {
     if (!JSONExt.isObject(option)) {
-      throw new Error("spark option data not found");
+      throw new Error('spark option data not found');
     }
-    if (!JSONExt.isObject(option["data"])) {
-      return "Spark";
+    if (!JSONExt.isObject(option['data'])) {
+      return 'Spark';
     }
-    if (!JSONExt.isPrimitive(option["data"]["category"])) {
-      return "Spark";
+    if (!JSONExt.isPrimitive(option['data']['category'])) {
+      return 'Spark';
     }
-    return JSONExt.deepCopy(option["data"]["category"]) as string;
+    return JSONExt.deepCopy(option['data']['category']) as string;
   }
 
   handleRemoveBundle(a: any) {
@@ -415,7 +409,7 @@ class ConfigurationComponent extends React.Component<
 
   handleRemoveConfig(a: any) {
     const newSparkOptions = this.state.list_of_options.filter((x: any) => {
-      return x["name"] != a;
+      return x['name'] != a;
     });
     this.setState({
       list_of_options: newSparkOptions,
@@ -433,7 +427,7 @@ class ConfigurationComponent extends React.Component<
   connectOnClick = () => {
     let options = {} as SparkOptionsToKernel;
     this.state.list_of_options.map((x: any) => {
-      options[x["name"]] = x["value"];
+      options[x['name']] = x['value'];
     });
     //here the bundles are merged with the other configurations
     //behaviour: if key in bundle does not exist already, it is created
@@ -441,21 +435,21 @@ class ConfigurationComponent extends React.Component<
     //if it exists, we use it to concatenate to the existing conf,
     //otherwise we don't add it: the choices of the user have higher priority
     this.state.bundled_options.map((bundleName: string) => {
-      this.props.availableBundles[bundleName]["options"].map(
+      this.props.availableBundles[bundleName]['options'].map(
         (bundleOption: SparkBundleOption) => {
-          if (bundleOption["name"] in options) {
+          if (bundleOption['name'] in options) {
             if (
-              bundleOption.hasOwnProperty("concatenate") &&
-              bundleOption["concatenate"] != ""
+              bundleOption.hasOwnProperty('concatenate') &&
+              bundleOption['concatenate'] != ''
             ) {
-              options[bundleOption["name"]] =
-                options[bundleOption["name"]] +
-                bundleOption["concatenate"] +
-                bundleOption["value"];
+              options[bundleOption['name']] =
+                options[bundleOption['name']] +
+                bundleOption['concatenate'] +
+                bundleOption['value'];
             } //else we don't add it
           } else {
             //we create the new option
-            options[bundleOption["name"]] = options[bundleOption["value"]];
+            options[bundleOption['name']] = options[bundleOption['value']];
           }
         }
       );
@@ -473,9 +467,9 @@ class ConfigurationComponent extends React.Component<
       };
     } = { options: options, metadata: metadata };
 
-    console.log("emitting", this.state);
-    console.log("sending otions", options);
-    this.props.signal.emit((message as unknown) as JSONObject);
+    console.log('emitting', this.state);
+    console.log('sending otions', options);
+    this.props.signal.emit(message as unknown as JSONObject);
   };
   /**
    * Renders a table of contents tree.
@@ -485,7 +479,7 @@ class ConfigurationComponent extends React.Component<
       <div className="jp-SparkConnector">
         <div className="jp-SparkConnector-panel">
           <span className="jp-SparkConnector-panelLabel">
-            {this.props.title}
+            Apache Spark | {this.props.title}
           </span>
         </div>
 
@@ -512,15 +506,13 @@ class ConfigurationComponent extends React.Component<
             handleRemoveBundle={this.handleRemoveBundle}
           />
         </div>
-        <div className="jp-SparkConnector-button">
-          <button
-            className="jp-SparkConnector-panelConnect jp-mod-styled "
-            id="actionbutton"
-            onClick={this.connectOnClick}
-          >
-            connect
-          </button>
-        </div>
+        <button
+          className="jp-SparkConnector-panelConnect jp-mod-styled jp-SparkConnector-button"
+          id="actionbutton"
+          onClick={this.connectOnClick}
+        >
+          connect
+        </button>
       </div>
     );
   }
