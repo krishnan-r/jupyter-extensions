@@ -29,6 +29,10 @@ export class ConfigurationState<P extends IState> {
     console.log(
       notebookTitle + " availableBunbles=" + JSON.stringify(availableBundles)
     );
+
+    const bundleOptions = availableBundles?.bundled_options ?? [];
+    const availableSparkOptions = availableOptions?.spark_options ?? [];
+
     this.onConnect = signal;
     this.template = (
       <ConfigurationComponent
@@ -37,8 +41,8 @@ export class ConfigurationState<P extends IState> {
         maxMemory={maxMemory}
         cluster={cluster}
         currentOptions={currentOptions}
-        availableOptions={availableOptions}
-        availableBundles={availableBundles["bundled_options"] as any}
+        availableSparkOptions={availableSparkOptions as any}
+        availableBundles={bundleOptions as any}
         signal={signal}
       />
     );
@@ -322,7 +326,7 @@ class ChooseBundles extends React.Component<ChooseBundleProps, {}> {
 interface IConfigurationProperties
   extends React.ClassAttributes<ConfigurationComponent> {
   currentOptions: SparkconnectMetadata;
-  availableOptions: JSONObject;
+  availableSparkOptions: Array<any>;
   availableBundles: AvailableBundles;
   title: string;
   cluster: string;
@@ -361,15 +365,7 @@ class ConfigurationComponent extends React.Component<
     this.handleRemoveConfig = this.handleRemoveConfig.bind(this);
   }
   getOptionsArray(): JSONArray {
-    if (!JSONExt.isObject(this.props.availableOptions)) {
-      throw new Error("spark_options key not found");
-    }
-
-    if (!JSONExt.isArray(this.props.availableOptions["spark_options"])) {
-      throw new Error("spark_options not an array");
-    }
-
-    return this.props.availableOptions["spark_options"] as Array<any>;
+    return this.props.availableSparkOptions as Array<any>;
   }
 
   getOptionLabel(option: JSONValue): string {
