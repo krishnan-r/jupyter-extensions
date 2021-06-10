@@ -1,0 +1,5 @@
+# Configure SparkConnector
+(cd SparkConnector/nbextension && yarn install)
+pip install -e SparkConnector
+jupyter labextension develop --overwrite ./SparkConnector
+echo "c.InteractiveShellApp.extensions.append('sparkconnector.connector')" >>  $(ipython profile locate default)/ipython_kernel_config.py
